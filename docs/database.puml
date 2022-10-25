@@ -1,0 +1,191 @@
+@startuml
+' Style
+!theme blueprint
+hide circle
+skinparam linetype ortho
+
+entity sector {
+    * id : integer <<PK>>
+    ---
+    * name : string
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity industry {
+    * id : integer <<PK>>
+    ---
+    * name : string
+    * sector_id : integer <<FK>>
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity company_type {
+    * id : integer <<PK>>
+    ---
+    * name : string
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity company {
+    * id : integer <<PK>>
+    ---
+    * ticker : string
+    * name : string
+    * currency : string
+    * description : string
+    stock_exchange : string
+    cik : string
+    figi : string
+    simfin : integer
+    is_sp_100 : boolean
+    is_sp_600 : boolean
+    is_sp_400 : boolean
+    is_sp_500 : boolean
+    industry_id : integer <<FK>>
+    company_type_id : integer <<FK>>
+    is_active : boolean
+    has_financials : boolean
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity peer {
+    * id : integer <<PK>>
+    ---
+    * peer : string
+    * company_id : integer <<FK>>
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity per_share {
+    * id : integer <<PK>>
+    ---
+    * year : integer
+    * fiscal_year : date
+    * restated : date
+    * book_value : string
+    * cashflow : string
+    * earnings : string
+    * dividends : string
+    * payout_ratio : string
+    * price_low : string
+    * price_high : string
+    * company_id : integer <<FK>>
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity income {
+    * id : integer <<PK>>
+    ---
+    * year : integer
+    * fiscal_year : date
+    * restated : date
+    revenue : string
+    gross_profit : string
+    depreciation : string
+    interest_expense : string
+    pretax_income : string
+    tax : string
+    net_income : string
+    net_income_core : string
+    bnk_provision_for_loan_losses : string
+    bnk_operating_income : string
+    ins_total_claims : string
+    ins_operating_income : string
+    company_id : integer <<FK>>
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity balance_sheet {
+    * id : integer <<PK>>
+    ---
+    * year : integer
+    * fiscal_year : date
+    * restated : date
+    shares_basic : string
+    shares_diluted : string
+    cash_equivalents_short_term_investments : string
+    accounts_receivable : string
+    inventories : string
+    total_current_assets : string
+    property_plant_equipment : string
+    long_term_investments_receivables : string
+    other_long_term_assets : string
+    total_non_current_assets : string
+    total_assets : string
+    accounts_payable : string
+    short_term_debt : string
+    total_current_assets : string
+    long_term_debts : string
+    total_non_current_assets : string
+    total_liabilities : string
+    share_capital : string
+    treasury_stock : string
+    retained_earnings : string
+    total_equity : string
+    total_liabilities_and_equity : string
+    bnk_inter_bank_assets : string
+    bnk_net_loans : string
+    bnk_total_deposits : string
+    ins_total_investments: string
+    ins_insurance_reserves: string
+    ins_policyholders_equity: string
+    company_id : integer <<FK>>
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+entity quarter {
+    * id : integer <<PK>>
+    ---
+    * year : integer
+    * quarter : string
+    * fiscal_year : date
+    * restated : date
+    shares_basic : string
+    shares_diluted : string
+    revenue : string
+    pretax_income : string
+    tax : string
+    net_income : string
+    net_income_core : string
+    dividends_paid : string
+    net_change_in_cash : string
+    company_id : integer <<FK>>
+    ---
+    * lock_version : integer
+    * created_at : timestamp
+    * updated_at : timestamp
+}
+
+sector ||-right-o{ industry
+industry ||--o{ company
+company_type ||--o{ company
+company ||-left-o| peer
+company -left-o| per_share
+company --o| income
+company -right-o| balance_sheet
+company --o| quarter
+@enduml
