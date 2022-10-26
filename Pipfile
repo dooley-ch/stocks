@@ -5,6 +5,15 @@ name = "pypi"
 
 [packages]
 pymysql = "*"
+click = "*"
+rich = "*"
+related = "*"
+loguru = "*"
+pyyaml = "*"
+beautifulsoup4 = "*"
+requests = "*"
+orjson = "*"
+retry = "*"
 
 [dev-packages]
 alembic = "*"

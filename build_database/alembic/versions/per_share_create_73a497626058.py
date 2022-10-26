@@ -28,8 +28,6 @@ def upgrade() -> None:
                     sa.Column('earnings', sa.String(length=50), nullable=True, server_default='NaN'),
                     sa.Column('dividends', sa.String(length=50), nullable=True, server_default='NaN'),
                     sa.Column('payout_ratio', sa.String(length=50), nullable=True, server_default='NaN'),
-                    sa.Column('price_low', sa.String(length=50), nullable=True, server_default='NaN'),
-                    sa.Column('price_high', sa.String(length=50), nullable=True, server_default='NaN'),
 
                     sa.Column('company_id', sa.Integer(), server_default='0', nullable=False),
                     sa.Column('lock_version', sa.SmallInteger, server_default='1', nullable=False),
@@ -51,8 +49,6 @@ def upgrade() -> None:
                     sa.Column('earnings', sa.String(length=50), nullable=True),
                     sa.Column('dividends', sa.String(length=50), nullable=True),
                     sa.Column('payout_ratio', sa.String(length=50), nullable=True),
-                    sa.Column('price_low', sa.String(length=50), nullable=True),
-                    sa.Column('price_high', sa.String(length=50), nullable=True),
 
                     sa.Column('company_id', sa.Integer(), nullable=True),
 
