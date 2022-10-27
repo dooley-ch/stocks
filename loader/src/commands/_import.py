@@ -75,6 +75,7 @@ def import_data() -> bool:
         ops.import_sp_500_file(progress, sp_500_task)
 
         ops.import_cik_file(progress, cik_task)
+        ops.import_peers_file(progress, peers_task)
 
         # TODO - Add code to build master list
 

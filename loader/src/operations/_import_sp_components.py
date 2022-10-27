@@ -20,7 +20,6 @@ __all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'im
 
 import csv
 import pathlib
-from time import sleep
 from loguru import logger
 from rich.progress import Progress, TaskID
 from .. import config
@@ -72,7 +71,6 @@ def import_sp_100_file(progress: Progress, task: TaskID) -> bool:
 
             actual_rows += 1
             if actual_rows < estimated_rows:
-                sleep(0.05)  # for cosmetics
                 progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
@@ -113,7 +111,6 @@ def import_sp_600_file(progress: Progress, task: TaskID) -> bool:
 
             actual_rows += 1
             if actual_rows < estimated_rows:
-                sleep(0.05)  # for cosmetics
                 progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
@@ -154,7 +151,6 @@ def import_sp_400_file(progress: Progress, task: TaskID) -> bool:
 
             actual_rows += 1
             if actual_rows < estimated_rows:
-                sleep(0.05)  # for cosmetics
                 progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
@@ -195,7 +191,6 @@ def import_sp_500_file(progress: Progress, task: TaskID) -> bool:
 
             actual_rows += 1
             if actual_rows < estimated_rows:
-                sleep(0.05)  # for cosmetics
                 progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)

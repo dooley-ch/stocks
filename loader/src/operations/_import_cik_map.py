@@ -44,7 +44,7 @@ def _read_cik_file(file: pathlib.Path):
 @logger.catch(reraise=True)
 def import_cik_file(progress: Progress, task: TaskID) -> bool:
     """
-    This function downloads and imports the S&P 100 index
+    This function downloads and imports the CIK file
     """
     estimated_rows = 11_500
     actual_rows = 0
@@ -72,7 +72,6 @@ def import_cik_file(progress: Progress, task: TaskID) -> bool:
 
             actual_rows += 1
             if actual_rows < estimated_rows:
-                sleep(0.05)  # for cosmetics
                 progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
