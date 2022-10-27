@@ -71,26 +71,6 @@ entity peer {
     * updated_at : timestamp
 }
 
-entity per_share {
-    * id : integer <<PK>>
-    ---
-    * year : integer
-    * fiscal_year : date
-    * restated : date
-    * book_value : string
-    * cashflow : string
-    * earnings : string
-    * dividends : string
-    * payout_ratio : string
-    * price_low : string
-    * price_high : string
-    * company_id : integer <<FK>>
-    ---
-    * lock_version : integer
-    * created_at : timestamp
-    * updated_at : timestamp
-}
-
 entity income {
     * id : integer <<PK>>
     ---
@@ -184,7 +164,6 @@ sector ||-right-o{ industry
 industry ||--o{ company
 company_type ||--o{ company
 company ||-left-o| peer
-company -left-o| per_share
 company --o| income
 company -right-o| balance_sheet
 company --o| quarter
