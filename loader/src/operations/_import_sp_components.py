@@ -21,10 +21,8 @@ __all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'im
 import csv
 import pathlib
 from time import sleep
-
 from loguru import logger
 from rich.progress import Progress, TaskID
-
 from .. import config
 from .. import datastore as ds
 from .. import services as svc

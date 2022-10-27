@@ -1,5 +1,5 @@
 # *******************************************************************************************
-#  File:  __init__.py
+#  File:  _import_peer_map.py
 #
 #  Created: 27-10-2022
 #
@@ -16,7 +16,4 @@ __version__ = "1.0.0"
 __maintainer__ = "James Dooley"
 __status__ = "Production"
 
-__all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'import_sp_500_file', 'import_cik_file']
-
-from . _import_sp_components import *
-from . _import_cik_map import import_cik_file
+__all__ = []

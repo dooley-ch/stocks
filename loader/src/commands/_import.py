@@ -41,10 +41,10 @@ def import_data() -> bool:
         sp_600_task = progress.add_task("[dodger_blue1]Importing S&P 600 index...", total=1, visible=False)
         sp_400_task = progress.add_task("[dodger_blue1]Importing S&P 400 index...", total=1, visible=False)
         sp_500_task = progress.add_task("[dodger_blue1]Importing S&P 500 index...", total=1, visible=False)
-        #
-        # cik_task = progress.add_task("Importing CIK file...", total=500)
-        # peers_task = progress.add_task("Importing Peers Map...", total=500)
-        #
+
+        cik_task = progress.add_task("[dark_orange3]Importing CIK file...", total=1, visible=False)
+        peers_task = progress.add_task("[dark_orange3]Importing Peers Map...", total=1, visible=False)
+
         # simfin_industries_task = progress.add_task("Importing SimFin Industries...", total=500)
         # simfin_companies_task = progress.add_task("Importing SimFin Companies...", total=500)
         #
@@ -73,6 +73,10 @@ def import_data() -> bool:
         ops.import_sp_600_file(progress, sp_600_task)
         ops.import_sp_400_file(progress, sp_400_task)
         ops.import_sp_500_file(progress, sp_500_task)
+
+        ops.import_cik_file(progress, cik_task)
+
+        # TODO - Add code to build master list
 
     logger.info("*** === Ended Importing Data === ***")
 
