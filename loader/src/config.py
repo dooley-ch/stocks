@@ -17,7 +17,7 @@ __maintainer__ = "James Dooley"
 __status__ = "Production"
 
 __all__ = ['application_folder', 'config_file', 'logs_folder', 'configure_logging', 'load_config', 'save_config',
-           'ApiKeys', 'ConfigFile']
+           'ApiKeys', 'ConfigFile', 'openfigi_key', 'simfin_key']
 
 import pathlib
 import sys
@@ -104,3 +104,19 @@ def configure_logging(log_name: str) -> None:
     loguru.logger.add(sys.stderr, format=console_format, level="ERROR", colorize=True)
     loguru.logger.add(log_file, rotation='1 day', retention='5 days', compression='zip', level='INFO', backtrace=True,
                       diagnose=True, format=file_format)
+
+
+def openfigi_key() -> str:
+    """
+    This function returns the openfigi key
+    """
+    data = load_config(config_file())
+    return data.keys.openfigi
+
+
+def simfin_key() -> str:
+    """
+    This function returns the simfin key
+    """
+    data = load_config(config_file())
+    return data.keys.openfigi
