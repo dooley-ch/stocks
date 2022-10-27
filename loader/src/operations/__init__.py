@@ -17,8 +17,9 @@ __maintainer__ = "James Dooley"
 __status__ = "Production"
 
 __all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'import_sp_500_file', 'import_cik_file',
-           'import_peers_file']
+           'import_peers_file', 'import_industries_file', 'import_companies_file']
 
 from . _import_sp_components import *
 from . _import_cik_map import import_cik_file
 from . _import_peer_map import import_peers_file
+from . _import_simfin_companies_and_industries import import_industries_file, import_companies_file

@@ -20,7 +20,6 @@ __all__ = ['import_cik_file']
 
 import csv
 import pathlib
-from time import sleep
 from loguru import logger
 from rich.progress import Progress, TaskID
 from .. import config

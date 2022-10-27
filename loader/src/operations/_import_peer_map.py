@@ -21,7 +21,6 @@ __all__ = ['import_peers_file']
 import related
 from loguru import logger
 from rich.progress import Progress, TaskID
-
 from .. import config
 from .. import datastore as ds
 from .. import model

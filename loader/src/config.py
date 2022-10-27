@@ -185,7 +185,7 @@ def simfin_key() -> str:
     This function returns the simfin key
     """
     data = load_config(config_file())
-    return data.keys.openfigi
+    return data.keys.simfin
 
 
 @related.immutable

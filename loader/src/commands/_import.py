@@ -45,9 +45,9 @@ def import_data() -> bool:
         cik_task = progress.add_task("[dark_orange3]Importing CIK file...", total=1, visible=False)
         peers_task = progress.add_task("[dark_orange3]Importing Peers Map...", total=1, visible=False)
 
-        # simfin_industries_task = progress.add_task("Importing SimFin Industries...", total=500)
-        # simfin_companies_task = progress.add_task("Importing SimFin Companies...", total=500)
-        #
+        simfin_industries_task = progress.add_task("[chartreuse2]Importing SimFin Industries...", total=1, visible=False)
+        simfin_companies_task = progress.add_task("[chartreuse2]Importing SimFin Companies...", total=1, visible=False)
+
         # simfin_income_general_annual_task = progress.add_task("Importing SimFin Annual General Income Statements...", total=500)
         # simfin_balance_sheet_general_annual_task = progress.add_task("Importing SimFin Annual General Balance Sheets...", total=500)
         # simfin_cashflow_general_annual_task = progress.add_task("Importing SimFin Annual General Cashflow Statements...", total=500)
@@ -76,6 +76,9 @@ def import_data() -> bool:
 
         ops.import_cik_file(progress, cik_task)
         ops.import_peers_file(progress, peers_task)
+
+        ops.import_industries_file(progress, simfin_industries_task)
+        ops.import_companies_file(progress, simfin_companies_task)
 
         # TODO - Add code to build master list
 
