@@ -20,7 +20,7 @@ __all__ = ['IndexComponent', 'CikComponent', 'FigiData', 'MorningstarProfile', '
            'SimFinPrice']
 
 import related
-import source.shared.model as model
+from .. import model
 
 
 @related.immutable()

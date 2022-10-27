@@ -18,6 +18,7 @@ __status__ = "Production"
 
 __all__ = ['import_data']
 
+from loguru import logger
 from rich.progress import Progress
 from .. import config
 from .. import ui
@@ -32,6 +33,8 @@ def import_data() -> bool:
     ui.console.clear(home=True)
     ui.console.line(1)
     ui.line("Import Data")
+
+    logger.info("*** === Started Importing Data === ***")
 
     with Progress() as progress:
         sp_100_task = progress.add_task("[dodger_blue1]Importing S&P 100 index...", total=1, visible=False)
@@ -70,5 +73,7 @@ def import_data() -> bool:
         ops.import_sp_600_file(progress, sp_600_task)
         ops.import_sp_400_file(progress, sp_400_task)
         ops.import_sp_500_file(progress, sp_500_task)
+
+    logger.info("*** === Ended Importing Data === ***")
 
     return True
