@@ -18,9 +18,13 @@ __status__ = "Production"
 
 __all__ = ['main']
 
+import atexit
+
+from loguru import logger
 import click
 from rich.traceback import install as rich_traceback
 from .. import ui
+from .. config import configure_logging
 from . _config import config as do_config
 from . _report import report as do_report
 from . _stage import stage as do_stage
@@ -107,8 +111,26 @@ def config(ctx: click.Context) -> None:
         ctx.exit(1)
 
 
+def exit_routine() -> None:
+    """
+    Logs the termination of the application
+    """
+    try:
+        logger.info("<========== E N D ==========>")
+    except:
+        ui.system_message('Failed to log application exit!')
+
+
 def main() -> None:
+    # Configure custom stack trace
     rich_traceback(show_locals=True, suppress=[click])
+
+    # Set up logging
+    configure_logging('loader.log')
+    atexit.register(exit_routine)
+
+    logger.info("<========== S T A R T E D ==========>")
+
 
     # Launch the application
     app()
