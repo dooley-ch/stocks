@@ -17,7 +17,7 @@ __maintainer__ = "James Dooley"
 __status__ = "Production"
 
 __all__ = ['application_folder', 'config_file', 'logs_folder', 'data_folder', 'configure_logging', 'load_config',
-           'save_config', 'ApiKeys', 'ConfigFile', 'openfigi_key', 'simfin_key',
+           'save_config', 'ApiKeys', 'ConfigFile', 'openfigi_key', 'simfin_key', 'database_info',
            'CIK_FILE', 'SP_100_FILE', 'SP_600_FILE', 'SP_400_FILE', 'SP_500_FILE', 'SIMFIN_BALANCE_BANK_ANNUAL_FILE',
            'SIMFIN_BALANCE_BANK_QUARTER_FILE', 'SIMFIN_BALANCE_GENERAL_ANNUAL_FILE',
            'SIMFIN_BALANCE_GENERAL_QUARTER_FILE',
@@ -33,9 +33,11 @@ __all__ = ['application_folder', 'config_file', 'logs_folder', 'data_folder', 'c
 
 import pathlib
 import sys
+from collections import namedtuple
+
 import click
-import related
 import loguru
+import related
 
 CIK_FILE = "cik.csv"
 
@@ -90,13 +92,32 @@ def config_file() -> pathlib.Path:
 
 @related.mutable
 class ApiKeys:
+    """
+    This class holds the api keys needed to download data
+    """
     openfigi: str = related.StringField(default='')
     simfin: str = related.StringField(default='')
 
 
+@related.mutable
+class Database:
+    """
+    This class holds the database connection information
+    """
+    user: str = related.StringField(default='')
+    password: str = related.StringField(default='')
+    database: str = related.StringField(default='')
+    host: str = related.StringField(default='localhost')
+    port: int = related.IntegerField(default=3306)
+
+
 @related.immutable
 class ConfigFile:
+    """
+    This class holds the contents of the configuration file
+    """
     keys: ApiKeys = related.ChildField(ApiKeys, default=ApiKeys())
+    database: Database = related.ChildField(Database, default=Database())
 
 
 def load_config(file: pathlib.Path) -> ConfigFile:
@@ -165,6 +186,30 @@ def simfin_key() -> str:
     """
     data = load_config(config_file())
     return data.keys.openfigi
+
+
+@related.immutable
+class _DatabaseInfo:
+    """
+    This class holds the parameters needed to connect to the database_old
+    """
+    user: str = related.StringField(required=True)
+    password: str = related.StringField(required=True)
+    database: str = related.StringField(required=True)
+    autocommit: bool = related.BooleanField(default=True)
+    host: str = related.StringField(default='localhost')
+    port: int = related.IntegerField(default=3306)
+
+
+def database_info():
+    """
+    Returns the details needed to create a database connection
+    """
+    DatabaseInfo = namedtuple('DatabaseInfo', ["user", "password", "database", "autocommit", "host", "port"])
+
+    data = load_config(config_file())
+    return DatabaseInfo(data.database.user, data.database.password, data.database.database, True, data.database.host,
+                        data.database.port)
 
 
 def data_folder() -> pathlib.Path:

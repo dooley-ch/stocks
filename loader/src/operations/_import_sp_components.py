@@ -21,9 +21,12 @@ __all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'im
 import csv
 import pathlib
 from time import sleep
+
 from loguru import logger
 from rich.progress import Progress, TaskID
+
 from .. import config
+from .. import datastore as ds
 from .. import services as svc
 
 
@@ -47,6 +50,7 @@ def import_sp_100_file(progress: Progress, task: TaskID) -> bool:
     """
     estimated_rows = 100
     actual_rows = 0
+    processed_rows = 0
 
     progress.update(task, visible=True, total=estimated_rows)
 
@@ -56,15 +60,26 @@ def import_sp_100_file(progress: Progress, task: TaskID) -> bool:
 
     svc.download_sp100(file)
 
-    for row in _read_sp_file(file):
-        actual_rows += 1
-        if actual_rows < estimated_rows:
-            sleep(0.05)  # for cosmetics
-            progress.update(task, advance=1)
+    db_conn = ds.get_connection(config.database_info())
+
+    with db_conn.cursor() as cursor:
+        # noinspection SqlWithoutWhere
+        cursor.execute("DELETE FROM z_sp_100;")
+
+    with db_conn:
+        for row in _read_sp_file(file):
+            record_id: int = ds.zSP100_insert(row.to_zSp100(), db_conn)
+            if record_id > 0:
+                processed_rows += 1
+
+            actual_rows += 1
+            if actual_rows < estimated_rows:
+                sleep(0.05)  # for cosmetics
+                progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
 
-    logger.info(f"Imported S&P 100 index: {actual_rows} rows loaded")
+    logger.info(f"Imported S&P 100 index: Actual Rows - {actual_rows}, Inserted Rows - {processed_rows}")
 
     return True
 
@@ -76,6 +91,7 @@ def import_sp_600_file(progress: Progress, task: TaskID) -> bool:
     """
     estimated_rows = 600
     actual_rows = 0
+    processed_rows = 0
 
     progress.update(task, visible=True, total=estimated_rows)
 
@@ -85,15 +101,26 @@ def import_sp_600_file(progress: Progress, task: TaskID) -> bool:
 
     svc.download_sp600(file)
 
-    for row in _read_sp_file(file):
-        actual_rows += 1
-        if actual_rows < estimated_rows:
-            sleep(0.05)  # for cosmetics
-            progress.update(task, advance=1)
+    db_conn = ds.get_connection(config.database_info())
+
+    with db_conn.cursor() as cursor:
+        # noinspection SqlWithoutWhere
+        cursor.execute("DELETE FROM z_sp_600;")
+
+    with db_conn:
+        for row in _read_sp_file(file):
+            record_id: int = ds.zSP600_insert(row.to_zSp600(), db_conn)
+            if record_id > 0:
+                processed_rows += 1
+
+            actual_rows += 1
+            if actual_rows < estimated_rows:
+                sleep(0.05)  # for cosmetics
+                progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
 
-    logger.info(f"Imported S&P 600 index: {actual_rows} rows loaded")
+    logger.info(f"Imported S&P 600 index: Actual Rows - {actual_rows}, Inserted Rows - {processed_rows}")
 
     return True
 
@@ -105,6 +132,7 @@ def import_sp_400_file(progress: Progress, task: TaskID) -> bool:
     """
     estimated_rows = 400
     actual_rows = 0
+    processed_rows = 0
 
     progress.update(task, visible=True, total=estimated_rows)
 
@@ -114,15 +142,26 @@ def import_sp_400_file(progress: Progress, task: TaskID) -> bool:
 
     svc.download_sp400(file)
 
-    for row in _read_sp_file(file):
-        actual_rows += 1
-        if actual_rows < estimated_rows:
-            sleep(0.05)  # for cosmetics
-            progress.update(task, advance=1)
+    db_conn = ds.get_connection(config.database_info())
+
+    with db_conn.cursor() as cursor:
+        # noinspection SqlWithoutWhere
+        cursor.execute("DELETE FROM z_sp_400;")
+
+    with db_conn:
+        for row in _read_sp_file(file):
+            record_id: int = ds.zSP400_insert(row.to_zSp400(), db_conn)
+            if record_id > 0:
+                processed_rows += 1
+
+            actual_rows += 1
+            if actual_rows < estimated_rows:
+                sleep(0.05)  # for cosmetics
+                progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
 
-    logger.info(f"Imported S&P 400 index: {actual_rows} rows loaded")
+    logger.info(f"Imported S&P 400 index: Actual Rows - {actual_rows}, Inserted Rows - {processed_rows}")
 
     return True
 
@@ -134,6 +173,7 @@ def import_sp_500_file(progress: Progress, task: TaskID) -> bool:
     """
     estimated_rows = 100
     actual_rows = 0
+    processed_rows = 0
 
     progress.update(task, visible=True, total=estimated_rows)
 
@@ -143,14 +183,25 @@ def import_sp_500_file(progress: Progress, task: TaskID) -> bool:
 
     svc.download_sp500(file)
 
-    for row in _read_sp_file(file):
-        actual_rows += 1
-        if actual_rows < estimated_rows:
-            sleep(0.05)  # for cosmetics
-            progress.update(task, advance=1)
+    db_conn = ds.get_connection(config.database_info())
+
+    with db_conn.cursor() as cursor:
+        # noinspection SqlWithoutWhere
+        cursor.execute("DELETE FROM z_sp_500;")
+
+    with db_conn:
+        for row in _read_sp_file(file):
+            record_id: int = ds.zSP500_insert(row.to_zSp500(), db_conn)
+            if record_id > 0:
+                processed_rows += 1
+
+            actual_rows += 1
+            if actual_rows < estimated_rows:
+                sleep(0.05)  # for cosmetics
+                progress.update(task, advance=1)
 
     progress.update(task, completed=estimated_rows)
 
-    logger.info(f"Imported S&P 500 index: {actual_rows} rows loaded")
+    logger.info(f"Imported S&P 500 index: Actual Rows - {actual_rows}, Inserted Rows - {processed_rows}")
 
     return True
