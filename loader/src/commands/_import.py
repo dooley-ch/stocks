@@ -20,9 +20,9 @@ __all__ = ['import_data']
 
 from loguru import logger
 from rich.progress import Progress
-from .. import config
-from .. import ui
+
 from .. import operations as ops
+from .. import ui
 
 
 def import_data() -> bool:
@@ -48,13 +48,13 @@ def import_data() -> bool:
         simfin_industries_task = progress.add_task("[chartreuse2]Importing SimFin Industries...", total=1, visible=False)
         simfin_companies_task = progress.add_task("[chartreuse2]Importing SimFin Companies...", total=1, visible=False)
 
-        # simfin_income_general_annual_task = progress.add_task("Importing SimFin Annual General Income Statements...", total=500)
-        # simfin_balance_sheet_general_annual_task = progress.add_task("Importing SimFin Annual General Balance Sheets...", total=500)
-        # simfin_cashflow_general_annual_task = progress.add_task("Importing SimFin Annual General Cashflow Statements...", total=500)
-        # simfin_income_general_quarter_task = progress.add_task("Importing SimFin Quarterly General Income Statements...", total=500)
-        # simfin_balance_sheet_general_quarter_task = progress.add_task("Importing SimFin Quarterly General Balance Sheets...", total=500)
-        # simfin_cashflow_general_quarter_task = progress.add_task("Importing SimFin Quarterly General Cashflow Statements...", total=500)
-        #
+        simfin_income_general_annual_task = progress.add_task("[medium_violet_red]Importing SimFin Annual General Income Statements...", total=1, visible=False)
+        simfin_balance_sheet_general_annual_task = progress.add_task("[medium_violet_red]Importing SimFin Annual General Balance Sheets...", total=1, visible=False)
+        simfin_cashflow_general_annual_task = progress.add_task("[medium_violet_red]Importing SimFin Annual General Cashflow Statements...", total=1, visible=False)
+        simfin_income_general_quarter_task = progress.add_task("[medium_violet_red]Importing SimFin Quarterly General Income Statements...", total=1, visible=False)
+        simfin_balance_sheet_general_quarter_task = progress.add_task("[medium_violet_red]Importing SimFin Quarterly General Balance Sheets...", total=1, visible=False)
+        simfin_cashflow_general_quarter_task = progress.add_task("[medium_violet_red]Importing SimFin Quarterly General Cashflow Statements...", total=1, visible=False)
+
         # simfin_income_bank_annual_task = progress.add_task("Importing SimFin Annual Bank Income Statements...", total=500)
         # simfin_balance_sheet_bank_annual_task = progress.add_task("Importing SimFin Annual Bank Balance Sheets...", total=500)
         # simfin_cashflow_bank_annual_task = progress.add_task("Importing SimFin Annual Bank Cashflow Statements...", total=500)
@@ -79,6 +79,9 @@ def import_data() -> bool:
 
         ops.import_industries_file(progress, simfin_industries_task)
         ops.import_companies_file(progress, simfin_companies_task)
+
+        ops.import_income_general_annual_file(progress, simfin_income_general_annual_task)
+        ops.import_income_general_quarter_file(progress, simfin_income_general_quarter_task)
 
         # TODO - Add code to build master list
 
