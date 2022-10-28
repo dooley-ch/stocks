@@ -64,7 +64,7 @@ def _read_income_general_file(file: pathlib.Path, delimiter=';'):
 @logger.catch(reraise=True)
 def import_income_general_annual_file(progress: Progress, task: TaskID) -> bool:
     """
-    This function downloads and imports the S&P 100 index
+    This function downloads and imports the SimFin General Income file - annual
     """
     estimated_rows = 11_000
     actual_rows = 0
@@ -105,19 +105,19 @@ def import_income_general_annual_file(progress: Progress, task: TaskID) -> bool:
 @logger.catch(reraise=True)
 def import_income_general_quarter_file(progress: Progress, task: TaskID) -> bool:
     """
-    This function downloads and imports the S&P 100 index
+    This function downloads and imports the SimFin General Income file - quarterly
     """
-    estimated_rows = 11_000
+    estimated_rows = 40_000
     actual_rows = 0
     processed_rows = 0
 
     progress.update(task, visible=True, total=estimated_rows)
 
-    file = config.data_folder().joinpath(config.SIMFIN_INCOME_GENERAL_ANNUAL_FILE)
+    file = config.data_folder().joinpath(config.SIMFIN_INCOME_GENERAL_QUARTER_FILE)
     if file.exists():
         file.unlink()
 
-    svc.download_simfin_income_general_annual(config.data_folder(), config.simfin_key())
+    svc.download_simfin_income_general_quarter(config.data_folder(), config.simfin_key())
 
     db_conn = ds.get_connection(config.database_info())
 
