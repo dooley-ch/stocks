@@ -72,44 +72,45 @@ def import_data() -> bool:
         openfigi_codes_task = progress.add_task("[chartreuse4] OpenFIGI codes...", total=1, visible=False)
         morningstar_profiles_task = progress.add_task("[chartreuse4] Morningstar Profiles...", total=1, visible=False)
 
-        # ops.import_sp_100_file(progress, sp_100_task)
-        # ops.import_sp_600_file(progress, sp_600_task)
-        # ops.import_sp_400_file(progress, sp_400_task)
-        # ops.import_sp_500_file(progress, sp_500_task)
-        #
-        # ops.import_cik_file(progress, cik_task)
-        # ops.import_peers_file(progress, peers_task)
-        #
-        # ops.import_industries_file(progress, simfin_industries_task)
-        # ops.import_companies_file(progress, simfin_companies_task)
-        #
-        # ops.import_income_general_annual_file(progress, simfin_income_general_annual_task)
-        # ops.import_balance_sheet_general_annual_file(progress, simfin_balance_sheet_general_annual_task)
-        # ops.import_cashflow_general_annual_file(progress, simfin_cashflow_general_annual_task)
-        #
-        # ops.import_income_general_quarter_file(progress, simfin_income_general_quarter_task)
-        # ops.import_balance_sheet_general_quarter_file(progress, simfin_balance_sheet_general_quarter_task)
-        # ops.import_cashflow_general_quarter_file(progress, simfin_cashflow_general_quarter_task)
-        #
-        # ops.import_income_bank_annual_file(progress, simfin_income_bank_annual_task)
-        # ops.import_balance_sheet_bank_annual_file(progress, simfin_balance_sheet_bank_annual_task)
-        # ops.import_cashflow_bank_annual_file(progress, simfin_cashflow_bank_annual_task)
-        # ops.import_income_bank_quarter_file(progress, simfin_income_bank_quarter_task)
-        # ops.import_balance_sheet_bank_quarter_file(progress, simfin_balance_sheet_bank_quarter_task)
-        # ops.import_cashflow_bank_quarter_file(progress, simfin_cashflow_bank_quarter_task)
-        #
-        # ops.import_income_insurance_annual_file(progress, simfin_income_insurance_annual_task)
-        # ops.import_balance_sheet_insurance_annual_file(progress, simfin_balance_sheet_insurance_annual_task)
-        # ops.import_cashflow_insurance_annual_file(progress, simfin_cashflow_insurance_annual_task)
-        # ops.import_income_insurance_quarter_file(progress, simfin_income_insurance_quarter_task)
-        # ops.import_balance_sheet_insurance_quarter_file(progress, simfin_balance_sheet_insurance_quarter_task)
-        # ops.import_cashflow_insurance_quarter_file(progress, simfin_cashflow_insurance_quarter_task)
-        #
-        # with ui.console.status("Building master ticker list..."):
-        #     ops.build_master_ticker_table()
-        #
-        # ops.import_openfigi_codes(progress, openfigi_codes_task)
+        ops.import_sp_100_file(progress, sp_100_task)
+        ops.import_sp_600_file(progress, sp_600_task)
+        ops.import_sp_400_file(progress, sp_400_task)
+        ops.import_sp_500_file(progress, sp_500_task)
+
+        ops.import_cik_file(progress, cik_task)
+        ops.import_peers_file(progress, peers_task)
+
+        ops.import_industries_file(progress, simfin_industries_task)
+        ops.import_companies_file(progress, simfin_companies_task)
+
+        ops.import_income_general_annual_file(progress, simfin_income_general_annual_task)
+        ops.import_balance_sheet_general_annual_file(progress, simfin_balance_sheet_general_annual_task)
+        ops.import_cashflow_general_annual_file(progress, simfin_cashflow_general_annual_task)
+
+        ops.import_income_general_quarter_file(progress, simfin_income_general_quarter_task)
+        ops.import_balance_sheet_general_quarter_file(progress, simfin_balance_sheet_general_quarter_task)
+        ops.import_cashflow_general_quarter_file(progress, simfin_cashflow_general_quarter_task)
+
+        ops.import_income_bank_annual_file(progress, simfin_income_bank_annual_task)
+        ops.import_balance_sheet_bank_annual_file(progress, simfin_balance_sheet_bank_annual_task)
+        ops.import_cashflow_bank_annual_file(progress, simfin_cashflow_bank_annual_task)
+        ops.import_income_bank_quarter_file(progress, simfin_income_bank_quarter_task)
+        ops.import_balance_sheet_bank_quarter_file(progress, simfin_balance_sheet_bank_quarter_task)
+        ops.import_cashflow_bank_quarter_file(progress, simfin_cashflow_bank_quarter_task)
+
+        ops.import_income_insurance_annual_file(progress, simfin_income_insurance_annual_task)
+        ops.import_balance_sheet_insurance_annual_file(progress, simfin_balance_sheet_insurance_annual_task)
+        ops.import_cashflow_insurance_annual_file(progress, simfin_cashflow_insurance_annual_task)
+        ops.import_income_insurance_quarter_file(progress, simfin_income_insurance_quarter_task)
+        ops.import_balance_sheet_insurance_quarter_file(progress, simfin_balance_sheet_insurance_quarter_task)
+        ops.import_cashflow_insurance_quarter_file(progress, simfin_cashflow_insurance_quarter_task)
+
+        ops.build_master_ticker_table()
+
+        ops.import_openfigi_codes(progress, openfigi_codes_task)
         ops.import_morningstar_profiles(progress, morningstar_profiles_task)
+
+        ops.scrub_filter_imported_data()
 
     logger.info("*** === Ended Importing Data === ***")
 
