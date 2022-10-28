@@ -18,7 +18,6 @@ __status__ = "Production"
 
 __all__ = ['import_cashflow_general_annual_file', 'import_cashflow_general_quarter_file']
 
-
 import csv
 import pathlib
 from loguru import logger
