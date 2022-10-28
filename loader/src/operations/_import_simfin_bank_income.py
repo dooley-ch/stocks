@@ -62,7 +62,7 @@ def import_income_bank_annual_file(progress: Progress, task: TaskID) -> bool:
     """
     This function downloads and imports the SimFin Bank Income file - annual
     """
-    estimated_rows = 11_000
+    estimated_rows = 400
     actual_rows = 0
     processed_rows = 0
 
@@ -103,7 +103,7 @@ def import_income_bank_quarter_file(progress: Progress, task: TaskID) -> bool:
     """
     This function downloads and imports the SimFin bank Income file - quarterly
     """
-    estimated_rows = 40_000
+    estimated_rows = 1_400
     actual_rows = 0
     processed_rows = 0
 
