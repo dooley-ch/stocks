@@ -63,7 +63,7 @@ def import_income_insurance_annual_file(progress: Progress, task: TaskID) -> boo
     """
     This function downloads and imports the SimFin Insurance Income file - annual
     """
-    estimated_rows = 400
+    estimated_rows = 240
     actual_rows = 0
     processed_rows = 0
 
@@ -104,7 +104,7 @@ def import_income_insurance_quarter_file(progress: Progress, task: TaskID) -> bo
     """
     This function downloads and imports the SimFin Insurance Income file - quarterly
     """
-    estimated_rows = 1_400
+    estimated_rows = 800
     actual_rows = 0
     processed_rows = 0
 

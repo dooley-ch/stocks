@@ -24,7 +24,8 @@ __all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'im
            'import_income_bank_quarter_file', 'import_balance_sheet_bank_annual_file',
            'import_balance_sheet_bank_quarter_file', 'import_cashflow_bank_annual_file',
            'import_cashflow_bank_quarter_file', 'import_income_insurance_annual_file',
-           'import_income_insurance_quarter_file']
+           'import_income_insurance_quarter_file', 'import_balance_sheet_insurance_annual_file',
+           'import_balance_sheet_insurance_quarter_file']
 
 from . _import_sp_components import *
 from . _import_cik_map import import_cik_file
@@ -37,3 +38,4 @@ from . _import_simfin_bank_income import *
 from . _import_simfin_bank_balance_sheet import *
 from . _import_simfin_bank_cashflow import *
 from . _import_simfin_insurance_income import *
+from . _import_simfin_insurance_balance_sheet import *
