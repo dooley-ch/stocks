@@ -62,12 +62,12 @@ def import_data() -> bool:
         simfin_balance_sheet_bank_quarter_task = progress.add_task("[gold3]Importing SimFin Quarterly Bank Balance Sheets...", total=1, visible=False)
         simfin_cashflow_bank_quarter_task = progress.add_task("[gold3]Importing SimFin Quarterly Bank Cashflow Statements...", total=1, visible=False)
 
-        # simfin_income_insurance_annual_task = progress.add_task("Importing SimFin Annual Insurance Income Statements...", total=500)
-        # simfin_balance_sheet_insurance_annual_task = progress.add_task("Importing SimFin Annual Insurance Balance Sheets...", total=500)
-        # simfin_cashflow_insurance_annual_task = progress.add_task("Importing SimFin Annual Insurance Cashflow Statements...", total=500)
-        # simfin_income_insurance_quarter_task = progress.add_task("Importing SimFin Quarterly Insurance Income Statements...", total=500)
-        # simfin_balance_sheet_insurance_quarter_task = progress.add_task("Importing SimFin Quarterly Insurance Balance Sheets...", total=500)
-        # simfin_cashflow_insurance_quarter_task = progress.add_task("Importing SimFin Quarterly Insurance Cashflow Statements...", total=500)
+        simfin_income_insurance_annual_task = progress.add_task("Importing SimFin Annual Insurance Income Statements...", total=1, visible=False)
+        simfin_balance_sheet_insurance_annual_task = progress.add_task("Importing SimFin Annual Insurance Balance Sheets...", total=1, visible=False)
+        simfin_cashflow_insurance_annual_task = progress.add_task("Importing SimFin Annual Insurance Cashflow Statements...", total=1, visible=False)
+        simfin_income_insurance_quarter_task = progress.add_task("Importing SimFin Quarterly Insurance Income Statements...", total=1, visible=False)
+        simfin_balance_sheet_insurance_quarter_task = progress.add_task("Importing SimFin Quarterly Insurance Balance Sheets...", total=1, visible=False)
+        simfin_cashflow_insurance_quarter_task = progress.add_task("Importing SimFin Quarterly Insurance Cashflow Statements...", total=1, visible=False)
 
         ops.import_sp_100_file(progress, sp_100_task)
         ops.import_sp_600_file(progress, sp_600_task)
@@ -90,8 +90,10 @@ def import_data() -> bool:
 
         ops.import_income_bank_annual_file(progress, simfin_income_bank_annual_task)
         ops.import_balance_sheet_bank_annual_file(progress, simfin_balance_sheet_bank_annual_task)
+        ops.import_cashflow_bank_annual_file(progress, simfin_cashflow_bank_annual_task)
         ops.import_income_bank_quarter_file(progress, simfin_income_bank_quarter_task)
         ops.import_balance_sheet_bank_quarter_file(progress, simfin_balance_sheet_bank_quarter_task)
+        ops.import_cashflow_bank_quarter_file(progress, simfin_cashflow_bank_quarter_task)
 
         # TODO - Add code to build master list
 
