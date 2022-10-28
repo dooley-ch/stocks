@@ -69,6 +69,8 @@ def import_data() -> bool:
         simfin_balance_sheet_insurance_quarter_task = progress.add_task("[plum2] SimFin Quarterly Insurance Balance Sheets...", total=1, visible=False)
         simfin_cashflow_insurance_quarter_task = progress.add_task("[plum2] SimFin Quarterly Insurance Cashflow Statements...", total=1, visible=False)
 
+        openfigi_codes_task = progress.add_task("[chartreuse4] OpenFIGI codes...", total=1, visible=False)
+
         ops.import_sp_100_file(progress, sp_100_task)
         ops.import_sp_600_file(progress, sp_600_task)
         ops.import_sp_400_file(progress, sp_400_task)
@@ -104,6 +106,8 @@ def import_data() -> bool:
 
         with ui.console.status("Building master ticker list..."):
             ops.build_master_ticker_table()
+
+        ops.import_openfigi_codes(progress, openfigi_codes_task)
 
     logger.info("*** === Ended Importing Data === ***")
 
