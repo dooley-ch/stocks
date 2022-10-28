@@ -102,7 +102,8 @@ def import_data() -> bool:
         ops.import_balance_sheet_insurance_quarter_file(progress, simfin_balance_sheet_insurance_quarter_task)
         ops.import_cashflow_insurance_quarter_file(progress, simfin_cashflow_insurance_quarter_task)
 
-        # TODO - Add code to build master list
+        with ui.console.status("Building master ticker list..."):
+            ops.build_master_ticker_table()
 
     logger.info("*** === Ended Importing Data === ***")
 
