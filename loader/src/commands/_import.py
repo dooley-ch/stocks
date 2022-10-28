@@ -97,8 +97,10 @@ def import_data() -> bool:
 
         ops.import_income_insurance_annual_file(progress, simfin_income_insurance_annual_task)
         ops.import_balance_sheet_insurance_annual_file(progress, simfin_balance_sheet_insurance_annual_task)
+        ops.import_cashflow_insurance_annual_file(progress, simfin_cashflow_insurance_annual_task)
         ops.import_income_insurance_quarter_file(progress, simfin_income_insurance_quarter_task)
         ops.import_balance_sheet_insurance_quarter_file(progress, simfin_balance_sheet_insurance_quarter_task)
+        ops.import_cashflow_insurance_quarter_file(progress, simfin_cashflow_insurance_quarter_task)
 
         # TODO - Add code to build master list
 
