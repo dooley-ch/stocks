@@ -38,6 +38,11 @@ def stage() -> bool:
         msg = Text(" Industries built successfully...", style="grey50 on black")
         ui.console.print(msg)
 
+    with ui.console.status("Building Companies"):
+        ops.build_companies()
+        msg = Text(" Companies successfully...", style="grey50 on black")
+        ui.console.print(msg)
+
     logger.info("*** === Ended Staging Data === ***")
 
     return True
