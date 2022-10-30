@@ -18,7 +18,26 @@ __status__ = "Production"
 
 __all__ = ['stage']
 
+from rich.text import Text
+from loguru import logger
+from .. import ui
+from .. import operations as ops
+
 
 def stage() -> bool:
-    print('Do Stage')
+    ui.console.clear(home=True)
+    ui.console.line(1)
+    ui.line("Stage Data")
+
+    logger.info("*** === Started Staging Data === ***")
+
+    with ui.console.status("Building Sectors and Industries..."):
+        ops.build_sectors_industries()
+        msg = Text(" Sectors built successfully...", style="grey50 on black")
+        ui.console.print(msg)
+        msg = Text(" Industries built successfully...", style="grey50 on black")
+        ui.console.print(msg)
+
+    logger.info("*** === Ended Staging Data === ***")
+
     return True
