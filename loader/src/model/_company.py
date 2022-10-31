@@ -275,7 +275,7 @@ class BalanceSheet:
         ins_policyholders_equity = kwargs.get('ins_policyholders_equity', self.ins_policyholders_equity)
         company_id = kwargs.get('company_id', self.company_id)
 
-        return BalanceSheet(self.id, self.year, fiscal_year, restated, shares_basic, shares_diluted, cash,
+        return BalanceSheet(self.id, year, fiscal_year, restated, shares_basic, shares_diluted, cash,
                             accounts_receivable, inventories, current_assets, total_assets, accounts_payable,
                             current_liabilities, long_term_debt, share_capital, total_capital, capital_expenditure,
                             cashflow, bnk_inter_bank_assets, bnk_net_loans, bnk_total_deposits, ins_total_investments,

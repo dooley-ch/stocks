@@ -35,14 +35,14 @@ def balance_sheet_insert(record: model.BalanceSheet, db_conn: pymysql.Connection
     """
     with db_conn.cursor() as cursor:
         try:
-            cursor.execute("""INSERT INTO balance_sheet(fiscal_year, restated, shares_basic, shares_diluted,
+            cursor.execute("""INSERT INTO balance_sheet(year, fiscal_year, restated, shares_basic, shares_diluted,
                                 cash, accounts_receivable, inventories, current_assets, total_assets, 
                                 accounts_payable, current_liabilities, long_term_debt, share_capital, total_capital, 
                                 capital_expenditure, cashflow, bnk_inter_bank_assets, bnk_net_loans, bnk_total_deposits, 
                                 ins_total_investments, ins_insurance_reserves, ins_policyholders_equity, company_id)
                               VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
-                                        %s, %s, %s, %s);""",
-                           (record.fiscal_year, record.restated, record.shares_basic,
+                                        %s, %s, %s, %s, %s);""",
+                           (record.year, record.fiscal_year, record.restated, record.shares_basic,
                             record.shares_diluted, str(record.cash), str(record.accounts_receivable),
                             str(record.inventories), str(record.current_assets), str(record.total_assets),
                             str(record.accounts_payable), str(record.current_liabilities), str(record.long_term_debt),

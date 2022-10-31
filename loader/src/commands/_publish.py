@@ -36,9 +36,14 @@ def publish() -> bool:
         msg = Text(" Companies published...", style="grey50 on black")
         ui.console.print(msg)
 
-    with ui.console.status("Publishing annual income..."):
+    with ui.console.status("Publishing annual income statements..."):
         ops.publish_income_annual()
         msg = Text(" Annual income published...", style="grey50 on black")
+        ui.console.print(msg)
+
+    with ui.console.status("Publishing annual balance sheets..."):
+        ops.publish_balance_sheet_annual()
+        msg = Text(" Annual balance sheets published...", style="grey50 on black")
         ui.console.print(msg)
 
     logger.info("*** === Ended Staging Data === ***")

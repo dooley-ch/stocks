@@ -19,12 +19,13 @@ __status__ = "Production"
 __all__ = ['publish_income_annual']
 
 from typing import Any
+
 import pymysql
 from loguru import logger
-from rich.progress import track
+
+from .. import config
 from .. import datastore as ds
 from .. import model
-from .. import config
 
 
 def _build_general_income(company: Any, db_conn: pymysql.Connection) -> None:
@@ -69,6 +70,8 @@ def _build_bank_income(company: Any, db_conn: pymysql.Connection) -> None:
             bnk_provision_for_loan_losses=row.provision_for_loan_losses,
             bnk_operating_income=row.operating_income_loss,
             company_id=company.id)
+        record = record.evolve(year=record.fiscal_year.year)
+
         ds.income_insert(record, db_conn)
 
 
@@ -90,6 +93,8 @@ def _build_insurance_income(company: Any, db_conn: pymysql.Connection) -> None:
             ins_total_claims=row.total_claims_losses,
             ins_operating_income=row.operating_income_loss,
             company_id=company.id)
+        record = record.evolve(year=record.fiscal_year.year)
+
         ds.income_insert(record, db_conn)
 
 
