@@ -25,6 +25,9 @@ from .. import operations as ops
 
 
 def stage() -> bool:
+    """
+    This function handles the staging of the imported data
+    """
     ui.console.clear(home=True)
     ui.console.line(1)
     ui.line("Stage Data")

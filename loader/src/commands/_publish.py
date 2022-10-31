@@ -18,7 +18,18 @@ __status__ = "Production"
 
 __all__ = []
 
+from rich.text import Text
+from loguru import logger
+from .. import ui
+from .. import operations as ops
+
 
 def publish() -> bool:
-    print('Do Publish')
+    ui.console.clear(home=True)
+    ui.console.line(1)
+    ui.line("Stage Data")
+
+    logger.info("*** === Started Staging Data === ***")
+    logger.info("*** === Ended Staging Data === ***")
+
     return True

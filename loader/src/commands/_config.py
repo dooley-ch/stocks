@@ -25,6 +25,9 @@ from .. import ui as ui
 
 
 def config() -> bool:
+    """
+    This function enables the user to configure the application
+    """
     config_data = cfg.load_config(cfg.config_file())
 
     ui.console.clear(home=True)

@@ -39,6 +39,7 @@ def build_companies() -> bool:
     with db_conn.cursor() as cursor:
         # noinspection SqlWithoutWhere
         cursor.execute("DELETE FROM zs_company;")
+        cursor.execute("DELETE FROM zs_peer;")
 
     with db_conn.cursor() as cursor:
         cursor.execute("""INSERT INTO zs_company(ticker, name, description, is_active)

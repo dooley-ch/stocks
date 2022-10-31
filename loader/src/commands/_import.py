@@ -28,7 +28,6 @@ from .. import ui
 def import_data() -> bool:
     """
     This function imports the data into the staging tables
-    :return:
     """
     ui.console.clear(home=True)
     ui.console.line(1)
