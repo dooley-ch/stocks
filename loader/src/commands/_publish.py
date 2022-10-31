@@ -27,9 +27,15 @@ from .. import operations as ops
 def publish() -> bool:
     ui.console.clear(home=True)
     ui.console.line(1)
-    ui.line("Stage Data")
+    ui.line("Publish Data")
 
     logger.info("*** === Started Staging Data === ***")
+
+    with ui.console.status("Publishing companies..."):
+        ops.publish_company()
+        msg = Text(" Companies published...", style="grey50 on black")
+        ui.console.print(msg)
+
     logger.info("*** === Ended Staging Data === ***")
 
     return True
