@@ -35,12 +35,12 @@ def income_insert(record: model.Income, db_conn: pymysql.Connection) -> int | No
     """
     with db_conn.cursor() as cursor:
         try:
-            cursor.execute("""INSERT INTO income(fiscal_year, restated, revenue,  gross_profit, depreciation, 
+            cursor.execute("""INSERT INTO income(year, fiscal_year, restated, revenue,  gross_profit, depreciation, 
                                     interest_expense, pretax_income, tax, net_income, net_income_core, 
                                     bnk_operating_income, bnk_provision_for_loan_losses, ins_operating_income, 
                                     ins_total_claims, company_id)  
-                              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);""",
-                           (record.fiscal_year, record.restated, str(record.revenue), str(record.gross_profit),
+                              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);""",
+                           (record.year, record.fiscal_year, record.restated, str(record.revenue), str(record.gross_profit),
                             str(record.depreciation), str(record.interest_expense), str(record.pretax_income),
                             str(record.tax), str(record.net_income), str(record.net_income_core),
                             str(record.bnk_operating_income), str(record.bnk_provision_for_loan_losses),
