@@ -63,7 +63,7 @@ __all__ = ['get_connection', 'CursorContext', 'get_version',
            'zsIndustryRecord_insert', 'zsIndustryRecord_get', 'zsIndustryRecord_get_by_sector',
            'zsCompanyRecord_get_tickers',
            'quarter_insert', 'quarter_update', 'quarter_delete', 'quarter_get', 'quarter_get_audit_records',
-           'quarter_get_audit_records_by_record', 'DatastoreError', 'DuplicateKeyError']
+           'quarter_get_by_year', 'quarter_get_audit_records_by_record', 'DatastoreError', 'DuplicateKeyError']
 
 from . _core import *
 from . _version import *

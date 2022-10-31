@@ -17,7 +17,7 @@ __maintainer__ = "James Dooley"
 __status__ = "Production"
 
 __all__ = ['quarter_insert', 'quarter_update', 'quarter_delete', 'quarter_get', 'quarter_get_audit_records',
-           'quarter_get_audit_records_by_record']
+           'quarter_get_audit_records_by_record', 'quarter_get_by_year']
 
 import loguru
 import related
@@ -101,6 +101,25 @@ def quarter_get(record_id: int, db_conn: pymysql.Connection) -> model.Quarter | 
                             pretax_income, tax, net_income, net_income_core, dividends_paid, net_change_in_cash, 
                             company_id, lock_version, created_at, updated_at 
                           FROM quarter WHERE (id = %s)""", (record_id,))
+        data = cursor.fetchone()
+        if data:
+            record = related.to_model(model.Quarter, data)
+            return record
+
+
+def quarter_get_by_year(company_id: int, year: int, db_conn: pymysql.Connection) -> model.Quarter | None:
+    """
+    This function returns a quarter record for the given parameters, if one exists
+    :param company_id: the id of the company to load
+    :param year: the year to load
+    :param db_conn: the database_old connection to use
+    :return: the PerShare record if one exists
+    """
+    with db_conn.cursor() as cursor:
+        cursor.execute("""SELECT id, year, quarter, fiscal_year, restated, shares_basic, shares_diluted, revenue, 
+                            pretax_income, tax, net_income, net_income_core, dividends_paid, net_change_in_cash, 
+                            company_id, lock_version, created_at, updated_at 
+                          FROM quarter WHERE (company_id = %s) AND (year = %s)""", (company_id, year))
         data = cursor.fetchone()
         if data:
             record = related.to_model(model.Quarter, data)

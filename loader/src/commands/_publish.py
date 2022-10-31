@@ -16,7 +16,7 @@ __version__ = "1.0.0"
 __maintainer__ = "James Dooley"
 __status__ = "Production"
 
-__all__ = []
+__all__ = ['publish']
 
 from rich.text import Text
 from loguru import logger
@@ -49,6 +49,11 @@ def publish() -> bool:
     with ui.console.status("Publishing cashflow figures..."):
         ops.publish_cashflow_figures()
         msg = Text(" Annual cashflow figures published...", style="grey50 on black")
+        ui.console.print(msg)
+
+    with ui.console.status("Publishing quarter figures..."):
+        ops.publish_quarters()
+        msg = Text(" Quarter figures published...", style="grey50 on black")
         ui.console.print(msg)
 
     logger.info("*** === Ended Staging Data === ***")

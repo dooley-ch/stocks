@@ -24,12 +24,11 @@ from loguru import logger
 import click
 from rich.traceback import install as rich_traceback
 from .. import ui
-from .. config import configure_logging
-from . _config import config as do_config
-from . _report import report as do_report
-from . _stage import stage as do_stage
-from . _publish import publish as do_publish
-from . _import import import_data as do_import_data
+from ..config import configure_logging
+from ._config import config as do_config
+from ._stage import stage as do_stage
+from ._publish import publish as do_publish
+from ._import import import_data as do_import_data
 
 
 @click.group(context_settings={'help_option_names': ('-h', '--help')})
@@ -83,20 +82,6 @@ def publish_data(ctx: click.Context) -> None:
         ctx.exit(1)
 
 
-@app.command("report")
-@click.pass_context
-def report(ctx: click.Context) -> None:
-    """
-    Display current report
-    """
-    if do_report():
-        ui.success_message('Report displayed successfully')
-        ctx.exit(0)
-    else:
-        ui.error_message('Failed to display report, see the log for details')
-        ctx.exit(1)
-
-
 @app.command("config")
 @click.pass_context
 def config(ctx: click.Context) -> None:
@@ -115,6 +100,7 @@ def exit_routine() -> None:
     """
     Logs the termination of the application
     """
+    # noinspection PyBroadException
     try:
         logger.info("<========== E N D ==========>")
     except:
@@ -130,7 +116,6 @@ def main() -> None:
     atexit.register(exit_routine)
 
     logger.info("<========== S T A R T E D ==========>")
-
 
     # Launch the application
     app()

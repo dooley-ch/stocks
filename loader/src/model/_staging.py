@@ -391,7 +391,7 @@ class _zIncomeBankRecord:
     income_loss_from_continuing_operations: str = related.StringField(default='NaN')
     net_extraordinary_gains_losses: str = related.StringField(default='NaN')
     net_income: str = related.StringField(default='NaN')
-    net_income_Common: str = related.StringField(default='NaN')
+    net_income_common: str = related.StringField(default='NaN')
 
 
 @related.immutable

@@ -29,7 +29,7 @@ __all__ = ['import_sp_100_file', 'import_sp_600_file', 'import_sp_400_file', 'im
            'import_cashflow_insurance_quarter_file', 'build_master_ticker_table', 'import_openfigi_codes',
            'import_morningstar_profiles', 'scrub_filter_imported_data',
            'build_sectors_industries', 'build_companies', 'publish_company', 'publish_income_annual',
-           'publish_balance_sheet_annual', 'publish_cashflow_figures']
+           'publish_balance_sheet_annual', 'publish_cashflow_figures', 'publish_quarters']
 
 from . _import_sp_components import *
 from . _import_cik_map import import_cik_file
@@ -54,3 +54,4 @@ from . _publish_company import publish_company
 from . _publish_income import publish_income_annual
 from . _publish_balance_sheet import publish_balance_sheet_annual
 from . _publish_cashflow import publish_cashflow_figures
+from . _publish_quarters import publish_quarters

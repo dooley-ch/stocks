@@ -19,10 +19,8 @@ __status__ = "Production"
 __all__ = ['publish_income_annual']
 
 from typing import Any
-
 import pymysql
 from loguru import logger
-
 from .. import config
 from .. import datastore as ds
 from .. import model
@@ -66,7 +64,7 @@ def _build_bank_income(company: Any, db_conn: pymysql.Connection) -> None:
             pretax_income=row.pretax_income_loss,
             tax=row.income_tax_expense_benefit_net,
             net_income=row.net_income,
-            net_income_core=row.net_income_Common,
+            net_income_core=row.net_income_common,
             bnk_provision_for_loan_losses=row.provision_for_loan_losses,
             bnk_operating_income=row.operating_income_loss,
             company_id=company.id)
