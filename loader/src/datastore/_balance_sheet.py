@@ -17,7 +17,7 @@ __maintainer__ = "James Dooley"
 __status__ = "Production"
 
 __all__ = ['balance_sheet_insert', 'balance_sheet_update', 'balance_sheet_delete', 'balance_sheet_get',
-           'balance_sheet_get_audit_records', 'balance_sheet_get_audit_records_by_record']
+           'balance_sheet_get_audit_records', 'balance_sheet_get_audit_records_by_record', 'balance_sheet_get_by_year']
 
 import loguru
 import related
@@ -119,6 +119,23 @@ def balance_sheet_get(record_id: int, db_conn: pymysql.Connection) -> model.Bala
                             cashflow, bnk_inter_bank_assets, bnk_net_loans, bnk_total_deposits, ins_total_investments, 
                             ins_insurance_reserves, ins_policyholders_equity, company_id, lock_version, created_at, 
                             updated_at FROM balance_sheet WHERE (id = %s)""", (record_id,))
+        data = cursor.fetchone()
+        if data:
+            record = related.to_model(model.BalanceSheet, data)
+            return record
+
+
+def balance_sheet_get_by_year(company_id: int, year: int, db_conn: pymysql.Connection) -> model.BalanceSheet | None:
+    """
+    This function returns the record based on the company id and financial year
+    """
+    with db_conn.cursor() as cursor:
+        cursor.execute("""SELECT id, fiscal_year, restated, shares_basic, shares_diluted, cash, 
+                            accounts_receivable, inventories, current_assets, total_assets, accounts_payable, 
+                            current_liabilities, long_term_debt, share_capital, total_capital, capital_expenditure, 
+                            cashflow, bnk_inter_bank_assets, bnk_net_loans, bnk_total_deposits, ins_total_investments, 
+                            ins_insurance_reserves, ins_policyholders_equity, company_id, lock_version, created_at, 
+                            updated_at FROM balance_sheet WHERE (company_id = %s) AND (year = %s)""", (company_id, year))
         data = cursor.fetchone()
         if data:
             record = related.to_model(model.BalanceSheet, data)

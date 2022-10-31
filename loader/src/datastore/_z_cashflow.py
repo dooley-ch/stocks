@@ -109,7 +109,7 @@ def zCashflowInsuranceAnnual_insert(record: zCashflowInsuranceAnnualRecord, db_c
         return cursor.lastrowid
 
 
-def zCashflowInsuranceAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -> zCashflowInsuranceAnnualRecord | None:
+def zCashflowInsuranceAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -> list[zCashflowInsuranceAnnualRecord] | None:
     """
     This function returns all record from the table
     :param ticker: the ticker to filter by
@@ -125,10 +125,13 @@ def zCashflowInsuranceAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connect
                                 cash_from_repurchase_of_equity, net_cash_from_financing_activities, 
                                 effect_of_foreign_exchange_rates, net_change_in_cash  
                             FROM z_cashflow_insurance_annual WHERE (ticker = %s);""", (ticker,))
-        row = cursor.fetchone()
-        if row:
-            record = related.to_model(zCashflowInsuranceAnnualRecord, row)
-            return record
+        rows = cursor.fetchall()
+        if rows:
+            records = list()
+            for row in rows:
+                record = related.to_model(zCashflowInsuranceAnnualRecord, row)
+                records.append(record)
+            return records
 
 
 def zCashflowBankQuarter_insert(record: zCashflowBankQuarterRecord, db_conn: pymysql.Connection) -> int | None:
@@ -217,7 +220,7 @@ def zCashflowBankAnnual_insert(record: zCashflowBankAnnualRecord, db_conn: pymys
         return cursor.lastrowid
 
 
-def zCashflowBankAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -> zCashflowBankAnnualRecord | None:
+def zCashflowBankAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -> list[zCashflowBankAnnualRecord] | None:
     """
     This function returns all record from the table
     :param ticker: the ticker to filter by
@@ -235,10 +238,13 @@ def zCashflowBankAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) 
                                 net_cash_from_financing_activities, effect_of_foreign_exchange_rates, 
                                 net_change_in_cash
                             FROM z_cashflow_bank_annual WHERE (ticker = %s);""", (ticker,))
-        row = cursor.fetchone()
-        if row:
-            record = related.to_model(zCashflowBankAnnualRecord, row)
-            return record
+        rows = cursor.fetchall()
+        if rows:
+            records = list()
+            for row in rows:
+                record = related.to_model(zCashflowBankAnnualRecord, row)
+                records.append(record)
+            return records
 
 
 def zCashflowGeneralQuarter_insert(record: zCashflowGeneralQuarterRecord, db_conn: pymysql.Connection) -> int | None:
@@ -328,7 +334,7 @@ def zCashflowGeneralAnnual_insert(record: zCashflowGeneralAnnualRecord, db_conn:
         return cursor.lastrowid
 
 
-def zCashflowGeneralAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -> zCashflowGeneralAnnualRecord | None:
+def zCashflowGeneralAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -> list[zCashflowGeneralAnnualRecord] | None:
     """
     This function returns all record from the table
     :param ticker: the ticker to filter by
@@ -345,7 +351,10 @@ def zCashflowGeneralAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connectio
                                 net_cash_from_investing_activities, dividends_paid, cash_from_repayment_of_debt, 
                                 cash_from_repurchase_of_equity, net_cash_from_financing_activities, net_change_in_cash
                             FROM z_cashflow_general_annual WHERE (ticker = %s);""", (ticker,))
-        row = cursor.fetchone()
-        if row:
-            record = related.to_model(zCashflowGeneralAnnualRecord, row)
-            return record
+        rows = cursor.fetchall()
+        if rows:
+            records = list()
+            for row in rows:
+                record = related.to_model(zCashflowGeneralAnnualRecord, row)
+                records.append(record)
+            return records
