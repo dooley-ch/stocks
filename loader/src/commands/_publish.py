@@ -56,6 +56,11 @@ def publish() -> bool:
         msg = Text(" Quarter figures published...", style="grey50 on black")
         ui.console.print(msg)
 
+    with ui.console.status("Resetting staging and import tables..."):
+        ops.reset_staging_area()
+        msg = Text(" Staging and Import tables reset...", style="grey50 on black")
+        ui.console.print(msg)
+
     logger.info("*** === Ended Staging Data === ***")
 
     return True
