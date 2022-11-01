@@ -1,0 +1,71 @@
+@startuml
+header Import Process
+skinparam sequenceMessageAlign center
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+
+actor Import_Command as cmd
+entity Wikipedia as wk
+entity SEC_EGAR as sec
+entity SimFin as sf
+entity Morningstar as ms
+collections Data_Folder as fldr
+database Database as datastore
+
+
+cmd -> wk: Download S&P 100 index components
+wk -> fldr: Store S&P 100 file
+fldr -> datastore: Import S&P 100 file
+cmd <- datastore: S&P 100 imported
+
+cmd -> wk: Download S&P 600 Index
+wk -> fldr: Store S&P 600 file
+fldr -> datastore: Import S&P 600 file
+cmd <- datastore: S&P 600 imported
+
+cmd -> wk: Download S&P 400 Index
+wk -> fldr: Store S&P 400 file
+fldr -> datastore: Import S&P 400 file
+cmd <- datastore: S&P 400 imported
+
+cmd -> wk: Download S&P 500 Index
+wk -> fldr: Store S&P 500 file
+fldr -> datastore: Import S&P 500 file
+cmd <- datastore: S&P 500 imported
+
+cmd -> sec: Download CIK file
+sec -> fldr: Store CIK file
+fldr -> datastore: Import CIK file
+cmd <- datastore: CIK file import completed
+
+cmd -> ms: Download Morningstar profiles
+ms -> datastore: Store profiles
+cmd <- datastore: Morningstar profiles stored
+
+cmd -> fldr: Import peers map
+fldr -> datastore: Import peers file
+cmd <- datastore: Peers import completed
+
+cmd -> sf: Import Companies & Industries
+sf -> fldr: Store companies and industries files
+fldr -> datastore: Import industries file
+fldr -> datastore: Import companies file
+cmd <- datastore: SimFin files imported
+
+cmd -> sf: Import income statements
+sf -> fldr: Store income statements
+fldr -> datastore: Import income statements
+cmd <- datastore: SimFin income statements imported
+
+cmd -> sf: Import balance sheets
+sf -> fldr: Store balance sheets
+fldr -> datastore: Import balance sheets
+cmd <- datastore: SimFin balance sheets imported
+
+cmd -> sf: Import cashflow statements
+sf -> fldr: Store cashflow statements
+fldr -> datastore: Import cashflow statements
+cmd <- datastore: SimFin cashflow statements files imported
+
+@enduml
