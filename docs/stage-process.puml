@@ -1,0 +1,32 @@
+@startuml
+header Import Process
+skinparam sequenceMessageAlign center
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+
+actor Stage_Command as cmd
+database Database as db
+
+cmd -> db: Build Sector table
+activate db
+db -> db: Delete sector records
+db -> db: Populate sector records
+cmd <- db: Sector table built
+deactivate db
+
+cmd -> db: Build industry table
+activate db
+db -> db: Delete industry records
+db -> db: Populate industry records
+cmd <- db: Industry table built
+deactivate db
+
+cmd -> db: Build company table
+activate db
+db -> db: Delete company records
+db -> db: Populate company records
+cmd <- db: Company table built
+deactivate db
+
+@enduml
