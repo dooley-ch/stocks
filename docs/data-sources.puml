@@ -1,0 +1,39 @@
+@startuml
+<style>
+cloud {
+  BackGroundColor #aliceblue
+  LineThickness 1
+  LineColor black
+}
+database {
+  BackGroundColor #ff9933
+  LineThickness 1
+  LineColor black
+}
+file {
+  BackGroundColor #ccbb33
+  LineThickness 1
+  LineColor black
+}
+package {
+  BackGroundColor #4444dd
+  LineThickness 1
+  LineColor black
+}
+</style>
+
+cloud Wikipedia
+cloud Morningstar
+cloud "SEC/EDGAR" as sec
+cloud SimFin
+database database
+file Peer_Map
+package Loader
+
+Wikipedia --> Loader : S&P Index components
+Morningstar --> Loader : Company profiles
+sec --> Loader : CIKs & Stock Exchange
+SimFin --> Loader : Sectors, Industries, Companies, Financials
+Peer_Map --> Loader : Competitors (Not updated)
+Loader --> database : Download & import
+@endum
