@@ -1,9 +1,9 @@
 @startuml
-header Import Process
+header Stage Process
 skinparam sequenceMessageAlign center
 skinparam sequenceArrowThickness 2
 skinparam roundcorner 20
-skinparam maxmessagesize 60
+skinparam maxmessagesize 400
 
 actor Stage_Command as cmd
 database Database as db

@@ -1,0 +1,56 @@
+@startuml
+header Publish Process
+skinparam sequenceMessageAlign center
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 400
+
+actor Publish_Command as cmd
+database Database as db
+
+cmd -> db: Publish sectors
+activate db
+db -> db: Update sector tables
+db -> cmd: Sectors updated
+deactivate db
+
+cmd -> db: Publish industries
+activate db
+db -> db: Update industry tables
+db -> cmd: Industries updated
+deactivate db
+
+cmd -> db: Publish companies
+activate db
+db -> db: Update company tables
+db -> cmd: Companies updated
+deactivate db
+
+cmd -> db: Publish income statements
+activate db
+db -> db: Delete income statement records
+db -> db: Insert income statements
+db -> cmd: Income statements inserted
+deactivate db
+
+cmd -> db: Publish balance sheets
+activate db
+db -> db: Delete balance sheet records
+db -> db: Insert balance sheet statements
+db -> cmd: Companies updated
+deactivate db
+
+cmd -> db: Append cashflow figures to balance sheets
+activate db
+db -> db: Append cashflow figures
+db -> cmd: Balance sheets updated
+deactivate db
+
+cmd -> db: Reset staging & Import tables
+activate db
+db -> db: Delete contents of staging tables
+db -> db: Delete contents of import tables
+db -> cmd: Staging area reset
+deactivate db
+
+@enduml

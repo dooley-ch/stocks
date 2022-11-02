@@ -3,7 +3,7 @@ header Import Process
 skinparam sequenceMessageAlign center
 skinparam sequenceArrowThickness 2
 skinparam roundcorner 20
-skinparam maxmessagesize 60
+skinparam maxmessagesize 400
 
 actor Import_Command as cmd
 entity Wikipedia as wk
