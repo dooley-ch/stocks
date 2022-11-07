@@ -296,7 +296,7 @@ def zIncomeBankQuarter_insert(record: zIncomeBankQuarterRecord, db_conn: pymysql
                             provision_for_loan_losses, net_Revenue_after_provisions, total_non_interest_expense, 
                             operating_income_loss, non_operating_income_loss, pretax_income_loss, 
                             income_tax_expense_benefit_net, income_loss_from_continuing_operations, 
-                            net_extraordinary_gains_losses, net_income, net_income_Common) 
+                            net_extraordinary_gains_losses, net_income, net_income_common) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, 
                                 %s, %s, %s);""",
                        (record.ticker, record.simfin_id, record.currency, record.fiscal_year, record.fiscal_period,
@@ -305,7 +305,7 @@ def zIncomeBankQuarter_insert(record: zIncomeBankQuarterRecord, db_conn: pymysql
                         record.net_Revenue_after_provisions, record.total_non_interest_expense,
                         record.operating_income_loss, record.non_operating_income_loss, record.pretax_income_loss,
                         record.income_tax_expense_benefit_net, record.income_loss_from_continuing_operations,
-                        record.net_extraordinary_gains_losses, record.net_income, record.net_income_Common))
+                        record.net_extraordinary_gains_losses, record.net_income, record.net_income_common))
         return cursor.lastrowid
 
 
@@ -332,7 +332,7 @@ def zIncomeBankQuarter_get_by_ticker(ticker: str, db_conn: pymysql.Connection) -
                             IF(income_loss_from_continuing_operations = '', 'NaN', income_loss_from_continuing_operations) AS income_loss_from_continuing_operations, 
                             IF(net_extraordinary_gains_losses = '', 'NaN', net_extraordinary_gains_losses) AS net_extraordinary_gains_losses, 
                             IF(net_income = '', 'NaN', net_income) AS net_income, 
-                            IF(net_income_Common = '', 'NaN', net_income_Common) AS net_income_Common
+                            IF(net_income_common = '', 'NaN', net_income_common) AS net_income_common
                             FROM z_income_bank_quarter WHERE (ticker = %s)
                             ORDER BY fiscal_year DESC, fiscal_period DESC LIMIT 8;""", (ticker,))
         rows = cursor.fetchall()
@@ -357,7 +357,7 @@ def zIncomeBankAnnual_insert(record: zIncomeBankAnnualRecord, db_conn: pymysql.C
                             provision_for_loan_losses, net_Revenue_after_provisions, total_non_interest_expense, 
                             operating_income_loss, non_operating_income_loss, pretax_income_loss, 
                             income_tax_expense_benefit_net, income_loss_from_continuing_operations, 
-                            net_extraordinary_gains_losses, net_income, net_income_Common) 
+                            net_extraordinary_gains_losses, net_income, net_income_common) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);""",
                        (record.ticker, record.simfin_id, record.currency, record.fiscal_year, record.fiscal_period,
                         record.report_date, record.publish_date, record.restated_date, record.shares_basic,
@@ -390,7 +390,7 @@ def zIncomeBankAnnual_get_by_ticker(ticker: str, db_conn: pymysql.Connection) ->
                             IF(income_loss_from_continuing_operations = '', 'NaN', income_loss_from_continuing_operations) AS income_loss_from_continuing_operations, 
                             IF(net_extraordinary_gains_losses = '', 'NaN', net_extraordinary_gains_losses) AS net_extraordinary_gains_losses, 
                             IF(net_income = '', 'NaN', net_income) AS net_income, 
-                            IF(net_income_Common = '', 'NaN', net_income_Common) AS net_income_Common
+                            IF(net_income_common = '', 'NaN', net_income_common) AS net_income_common
                             FROM z_income_bank_annual WHERE (ticker = %s) ORDER BY fiscal_year LIMIT 10;""", (ticker,))
         rows = cursor.fetchall()
         if rows:

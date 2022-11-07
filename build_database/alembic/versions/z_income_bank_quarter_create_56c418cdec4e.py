@@ -42,7 +42,7 @@ def upgrade() -> None:
                     sa.Column('income_loss_from_continuing_operations', sa.String(length=50), nullable=True),
                     sa.Column('net_extraordinary_gains_losses', sa.String(length=50), nullable=True),
                     sa.Column('net_income', sa.String(length=50), nullable=True),
-                    sa.Column('net_income_Common', sa.String(length=50), nullable=True))
+                    sa.Column('net_income_common', sa.String(length=50), nullable=True))
     op.create_index('z_income_bank_quarter_ticker', 'z_income_bank_quarter', ['ticker'])
     op.create_index('z_income_bank_quarter_simfin_id', 'z_income_bank_quarter', ['simfin_id'])
 
